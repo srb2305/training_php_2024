@@ -28,20 +28,43 @@ select * from users ORDER BY `id` DESC LIMIT 2; // Last 2 record
 select * from users ORDER BY `id` DESC LIMIT 1,2; // Second and third last result
 
 
+<h2>Insert multiple data in one query</h2>
+INSERT INTO assignments (`title`,`image`,`user_id`) VALUES 
+('responsive design task','imag2.jpg', 1),
+('responsive form task','imag2.jpg', 2),
+('html design task','imag2.jpg', 3),
+('bootstrap design task','imag2.jpg', 4),
+('jquery design task','imag2.jpg', 3);
+
+
+<h2>Where</h2>
+SELECT * FROM assignments WHERE `user_id`=2;
+SELECT * FROM assignments WHERE `user_id`=2 OR `user_id`=1;
+SELECT * FROM assignments WHERE `user_id`=1 AND `id`=1;
+SELECT * FROM assignments WHERE `user_id` != 1;
+SELECT * FROM `users` WHERE `name` = 'raj';
+
+
+SELECT * FROM `users` WHERE `name` LIKE 's%';
+SELECT * FROM `users` WHERE `name` LIKE '%s%';
+SELECT * FROM `users` WHERE `name` LIKE 'ra%';
+
+<h2>Update Record</h2>
+UPDATE users
+SET `name`='Ram',`contact`='99999999'
+WHERE id=2
+
+
+<h2>Delete data</h2>
+DELETE FROM assignments WHERE `id` = 5;
+
+<h2>JOIN</h2>
+- Left Join
+- Right Join
+- Inner Join
+- Outer Join
+
+
+
 </pre>
-<?php
-$array = [ 
-	'101'=>'ram',
-	'102' =>'shyam',
-	'103'=> 'mohan',
-	'104'=>'sohan'
-];
-
-foreach($array as $k=>$v){
-	echo '<br>'.$k.'='.$v;
-}
-
-
-
-?>
 
