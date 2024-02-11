@@ -65,6 +65,40 @@ DELETE FROM assignments WHERE `id` = 5;
 - Outer Join
 
 
+<h2>LEFT JOIN</h2>
+SELECT assignments.id,assignments.title,users.name 
+FROM `assignments` 
+LEFT JOIN `users`
+ON assignments.user_id = users.id;
 
+
+<h2>Right Join</h2>
+	SELECT assignments.id,assignments.title,users.name as full_name 
+FROM `assignments` 
+RIGHT JOIN `users` 
+ON assignments.user_id = users.id;
 </pre>
+
+<h2>Inner Join</h2>
+	SELECT assignments.id,assignments.title,users.name as full_name 
+FROM `assignments` 
+INNER JOIN 
+`users` ON assignments.user_id = users.id;
+
+<h2>Outer Join </h2>
+	SELECT assignments.id,assignments.title,users.name as full_name 
+	FROM `assignments`
+	FULL OUTER JOIN `users` 
+	ON assignments.user_id = users.id;
+
+
+<h2>COUNT</h2>
+SELECT COUNT(*) FROM `feedbacks`;
+SELECT COUNT(*) as total_reviews FROM `feedbacks`;
+SELECT user_id, MAX(rating) FROM `feedbacks`;
+SELECT user_id, MIN(rating) FROM `feedbacks`;
+SELECT SUM(rating) FROM `feedbacks`;
+
+
+
 
