@@ -4,3 +4,4 @@
 
 <a href="user_add.php">Add User</a>
 <a href="feedback_add.php">Add Feedback</a>
+<a href="task_add.php">Add Task</a>

@@ -33,4 +33,48 @@
 		}
 		header('location:feedback_list.php');
 	}
+
+	if(isset($_POST['task_add'])){
+		$title = $_POST['title'];
+
+		$iamge_name = '';
+		if($_FILES['image']) {
+			$temp_name = $_FILES['image']['tmp_name'];
+			$iamge_name = $_FILES['image']['name'];
+			$destinationPath = "task_image/".$iamge_name;
+			move_uploaded_file($temp_name,$destinationPath);
+		}
+
+		$query = "insert into assignments(title,image) values ('$title','$iamge_name')";
+		$result = mysqli_query($con,$query);
+		if($result){
+			echo "Task added successfully";
+		} else{
+			echo "Something went wrong...";
+		}
+		header('location:task_list.php');
+	}
+
+
+	if(isset($_GET['delete_task_id'])){
+		$id = $_GET['delete_task_id'];
+		$query = "delete from assignments where id = '$id'";
+		$result = mysqli_query($con,$query);
+		if($result){
+			echo "Task deleted successfully";
+		} else{
+			echo "Something went wrong...";
+		}
+		header('location:task_list.php');
+	}
+
+
+
+
+
+
+
+
+
+
 ?>
