@@ -11,12 +11,31 @@
 		//echo $query;
 		$result = mysqli_query($con,$query);
 		if($result){
-			echo "Data inserted successfully";
+			$message =  "Data inserted successfully";
 		}else{
-			echo "Not inserted...";
+			$message = "Not inserted...";
 		}
 
-		header('location:user_list.php');
+		header('location:user_list.php?msg='.$message);
+	}
+
+	if(isset($_POST['update_user'])){
+		$name = $_POST['full_name'];
+		$email = $_POST['email_id'];
+		$number = $_POST['contact_number'];
+		$address = $_POST['address'];
+		$id = $_POST['user_id'];
+
+		$query = "update users set name='$name',email='$email',contact='$number',address='$address' where id=$id";
+		//echo $query;
+		$result = mysqli_query($con,$query);
+		if($result){
+			$message = "Data updated successfully";
+		}else{
+			$message = "Not updated...";
+		}
+
+		header('location:user_list.php?msg='.$message);
 	}
 
 
@@ -66,6 +85,37 @@
 			echo "Something went wrong...";
 		}
 		header('location:task_list.php');
+	}
+
+	if(isset($_GET['delete_user_id'])){
+		$id = $_GET['delete_user_id'];
+		$query = "delete from users where id = '$id'";
+		$result = mysqli_query($con,$query);
+		if($result){
+			$message = "User deleted successfully";
+		} else{
+			$message = "Something went wrong...";
+		}
+		header('location:user_list.php?msg='.$message);
+	}
+
+	if(isset($_GET['change_status_id'])){
+		$userId = $_GET['change_status_id'];
+		$current_status = $_GET['current_status'];
+		if($current_status == 1){
+			$newStatus = 0;
+		}else{
+			$newStatus = 1;
+		}
+
+		$query = "update users set active=$newStatus where id = '$userId'";
+		$result = mysqli_query($con,$query);
+		if($result){
+			$message = "Status updated successfully";
+		} else{
+			$message = "Something went wrong...";
+		}
+		header('location:user_list.php?msg='.$message);
 	}
 
 

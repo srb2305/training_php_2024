@@ -6,13 +6,14 @@
 <h1>Assignment/Task List</h1>
 
 <?php 
-	$qry = "select * from assignments";
+	$qry = "select assignments.id,assignments.title,assignments.image,users.name from assignments INNER JOIN users ON assignments.user_id = users.id";
 	$result = mysqli_query($con, $qry);
 ?>
 
 <table border="1">
 	<thead>
 		<th>S/No</th>
+		<th>User Name</th>
 		<th>Title</th>
 		<th>Image</th>
 		<th>Action</th>
@@ -21,6 +22,7 @@
 	<?php while($currentRow = mysqli_fetch_assoc($result) ){ ?>	
 		<tr>
 			<td><?php echo $currentRow['id']; ?></td>
+			<td><?php echo $currentRow['name']; ?></td>
 			<td><?php echo $currentRow['title']; ?></td>
 			<td>
 				<img src="task_image/<?php echo $currentRow['image']; ?>" style="width: 50;height: 50;">
