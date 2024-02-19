@@ -119,7 +119,37 @@
 	}
 
 
+	if(isset($_POST['register_user'])){
+		$name = $_POST['full_name'];
+		$email = $_POST['email'];
+		$number = $_POST['contact_number'];
+		$role = 'user';
+		$password = $_POST['password'];
+		$confirm_password = $_POST['confirm_password'];
+		if($password != $confirm_password) {
+			$msg = "Password and confirm password did not match";
+			header('location:register.php?msg='.$msg);
+		}
+		$encryptedPassword = md5($password);
 
+		
+		
+		$qry = "insert into users(name,email,contact,role,password) values('$name','$email','$number','$role','$encryptedPassword')";
+		$return = mysqli_query($con,$qry);
+		if($return){
+			$msg = "Register Successfully...";
+		} else {
+			$msg = "Not Registered....";
+		}
+		header('location:user_list.php?msg='.$msg);
+
+
+
+
+
+
+
+	}
 
 
 
