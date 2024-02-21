@@ -1,5 +1,6 @@
 <?php 
 	include('database.php');
+	session_start();
 
 	if(isset($_POST['add_user'])){
 		$name = $_POST['full_name'];
@@ -142,13 +143,34 @@
 			$msg = "Not Registered....";
 		}
 		header('location:user_list.php?msg='.$msg);
+	}
 
 
+	if(isset($_POST['login'])){
+		$email = $_POST['email_id'];
+		$password = md5($_POST['password']);
+		$qry = "select * from users where email='$email' and password='$password'";
+		$result = mysqli_query($con,$qry);
+		$_SESSION['is_user_login'] = 0;
+		if(mysqli_num_rows($result) > 0){
+			$userData = mysqli_fetch_assoc($result);
+			$userName = $userData['name'];
+			$userEmail = $userData['email'];
+			$userContact = $userData['contact'];
+			
+			// set values in session
+			$_SESSION['is_user_login'] = 1;
+			$_SESSION['user_name'] = $userName;
+			$_SESSION['user_email'] = $userEmail;
+			$_SESSION['user_contact'] = $userContact;
 
 
-
-
-
+			$msg = "Logedin Successfully";
+			header('location:profile.php');
+		}else{
+			$msg = "Invalid email and password";
+			header('location:login.php?msg='.$msg);
+		}
 	}
 
 
